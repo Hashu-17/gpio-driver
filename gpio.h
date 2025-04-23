@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "stm32f4xx.h"
+#include "stm32l4xx.h"
 
 typedef enum {
     GPIO_MODE_INPUT = 0x00,

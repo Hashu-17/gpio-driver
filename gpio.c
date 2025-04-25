@@ -19,3 +19,4 @@ void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value) {
 bool gpio_read(GPIO_TypeDef *port, uint8_t pin) {
     return (port->IDR >> pin) & 0x1;
 }
+//new version of gpio.c

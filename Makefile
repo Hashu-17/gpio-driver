@@ -1,5 +1,5 @@
 CC ?= gcc
-CFLAGS ?= -std=c11
+CFLAGS ?= -std=c11 -Wall -Wextra
 SRC = main.c gpio.c
 TARGET = gpio_demo
 

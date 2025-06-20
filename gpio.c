@@ -21,3 +21,15 @@ void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value) {
 bool gpio_read(GPIO_TypeDef *port, uint8_t pin) {
     return ((port->IDR >> pin) & 0x1U) != 0U;
 }
+
+void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode) {
+    if (pin == NULL) {
+        return;
+    }
+    gpio_config_t cfg = {
+        .port = pin->port,
+        .pin = pin->pin,
+        .mode = mode,
+    };
+    gpio_init(&cfg);
+}

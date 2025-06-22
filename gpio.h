@@ -23,6 +23,7 @@ typedef struct {
     gpio_mode_t mode;
 } gpio_config_t;
 
+void gpio_port_enable(GPIO_TypeDef *port);
 void gpio_init(gpio_config_t *cfg);
 void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode);
 void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value);

@@ -12,6 +12,13 @@ typedef enum {
     GPIO_MODE_ANALOG = 0x03
 } gpio_mode_t;
 
+typedef enum {
+    GPIO_SPEED_LOW = 0x00,
+    GPIO_SPEED_MEDIUM = 0x01,
+    GPIO_SPEED_HIGH = 0x02,
+    GPIO_SPEED_VERY_HIGH = 0x03
+} gpio_speed_t;
+
 typedef struct {
     GPIO_TypeDef *port;
     uint8_t pin;

@@ -13,6 +13,11 @@ typedef enum {
 } gpio_mode_t;
 
 typedef enum {
+    GPIO_OUTPUT_PUSHPULL = 0x00,
+    GPIO_OUTPUT_OPENDRAIN = 0x01
+} gpio_output_type_t;
+
+typedef enum {
     GPIO_SPEED_LOW = 0x00,
     GPIO_SPEED_MEDIUM = 0x01,
     GPIO_SPEED_HIGH = 0x02,

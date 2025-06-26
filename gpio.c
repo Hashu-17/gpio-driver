@@ -34,6 +34,10 @@ void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode) {
         .port = pin->port,
         .pin = pin->pin,
         .mode = mode,
+        .output_type = GPIO_OUTPUT_PUSHPULL,
+        .pull = GPIO_PULL_NONE,
+        .speed = GPIO_SPEED_LOW,
+        .alternate = 0U,
     };
     gpio_init(&cfg);
 }

@@ -35,6 +35,13 @@ void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value) {
         port->ODR &= ~(1U << pin);
 }
 
+void gpio_toggle(GPIO_TypeDef *port, uint8_t pin) {
+    if (!gpio_is_valid(port, pin)) {
+        return;
+    }
+    port->ODR ^= (1U << pin);
+}
+
 bool gpio_read(GPIO_TypeDef *port, uint8_t pin) {
     if (!gpio_is_valid(port, pin)) {
         return false;

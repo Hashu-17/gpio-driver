@@ -50,5 +50,6 @@ void gpio_init(gpio_config_t *cfg);
 void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode);
 void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value);
 bool gpio_read(GPIO_TypeDef *port, uint8_t pin);
+void gpio_toggle(GPIO_TypeDef *port, uint8_t pin);
 
 #endif

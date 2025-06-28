@@ -49,6 +49,27 @@ bool gpio_read(GPIO_TypeDef *port, uint8_t pin) {
     return ((port->IDR >> pin) & 0x1U) != 0U;
 }
 
+void gpio_pin_write(gpio_pin_t *pin, bool value) {
+    if (pin == NULL) {
+        return;
+    }
+    gpio_write(pin->port, pin->pin, value);
+}
+
+bool gpio_pin_read(gpio_pin_t *pin) {
+    if (pin == NULL) {
+        return false;
+    }
+    return gpio_read(pin->port, pin->pin);
+}
+
+void gpio_pin_toggle(gpio_pin_t *pin) {
+    if (pin == NULL) {
+        return;
+    }
+    gpio_toggle(pin->port, pin->pin);
+}
+
 void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode) {
     if (pin == NULL) {
         return;

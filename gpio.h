@@ -7,6 +7,8 @@
 
 #define GPIO_PIN_COUNT 16U
 
+#define GPIO_PIN_MASK(pin) (1U << (pin))
+
 typedef enum {
     GPIO_MODE_INPUT = 0x00,
     GPIO_MODE_OUTPUT = 0x01,

@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include "stm32l4xx.h"
 
+#define GPIO_PIN_COUNT 16U
+
 typedef enum {
     GPIO_MODE_INPUT = 0x00,
     GPIO_MODE_OUTPUT = 0x01,

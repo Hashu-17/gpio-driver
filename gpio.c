@@ -1,5 +1,6 @@
 #include "gpio.h"
 
+
 static bool gpio_is_valid(GPIO_TypeDef *port, uint8_t pin) {
     return port != NULL && pin < 16U;
 }

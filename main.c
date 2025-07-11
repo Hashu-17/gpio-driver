@@ -1,5 +1,12 @@
 #include "gpio.h"
 
+static void delay(volatile uint32_t cycles) {
+    while (cycles--) {
+    }
+}
+
 int main(void) {
-    return 0;
+    while (1) {
+        delay(100000U);
+    }
 }

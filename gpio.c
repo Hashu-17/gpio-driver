@@ -31,9 +31,9 @@ void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value) {
         return;
     }
     if (value)
-        port->ODR |= (1U << (uint32_t)pin);
+        port->BSRR = (1U << (uint32_t)pin);
     else
-        port->ODR &= ~(1U << (uint32_t)pin);
+        port->BSRR = (1U << ((uint32_t)pin + 16U));
 }
 
 void gpio_toggle(GPIO_TypeDef *port, uint8_t pin) {

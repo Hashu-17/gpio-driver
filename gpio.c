@@ -14,6 +14,14 @@ void gpio_port_enable(GPIO_TypeDef *port) {
     else if (port == GPIOC) RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
 }
 
+void gpio_set_mode(GPIO_TypeDef *port, uint8_t pin, gpio_mode_t mode) {
+    if (!gpio_is_valid(port, pin)) {
+        return;
+    }
+    port->MODER &= ~(0x3U << (pin * 2U));
+    port->MODER |= ((uint32_t)mode << (pin * 2U));
+}
+
 void gpio_init(gpio_config_t *cfg) {
     if (cfg == NULL) {
         return;
@@ -22,8 +30,7 @@ void gpio_init(gpio_config_t *cfg) {
         return;
     }
     gpio_port_enable(cfg->port);
-    cfg->port->MODER &= ~(0x3U << (cfg->pin * 2U));
-    cfg->port->MODER |= ((uint32_t)cfg->mode << (cfg->pin * 2U));
+    gpio_set_mode(cfg->port, cfg->pin, cfg->mode);
 }
 
 void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value) {

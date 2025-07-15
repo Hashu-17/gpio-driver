@@ -22,6 +22,16 @@ void gpio_set_mode(GPIO_TypeDef *port, uint8_t pin, gpio_mode_t mode) {
     port->MODER |= ((uint32_t)mode << (pin * 2U));
 }
 
+void gpio_set_output_type(GPIO_TypeDef *port, uint8_t pin, gpio_output_type_t otype) {
+    if (!gpio_is_valid(port, pin)) {
+        return;
+    }
+    if (otype == GPIO_OUTPUT_OPENDRAIN)
+        port->OTYPER |= (1U << pin);
+    else
+        port->OTYPER &= ~(1U << pin);
+}
+
 void gpio_set_speed(GPIO_TypeDef *port, uint8_t pin, gpio_speed_t speed) {
     if (!gpio_is_valid(port, pin)) {
         return;
@@ -39,6 +49,7 @@ void gpio_init(gpio_config_t *cfg) {
     }
     gpio_port_enable(cfg->port);
     gpio_set_mode(cfg->port, cfg->pin, cfg->mode);
+    gpio_set_output_type(cfg->port, cfg->pin, cfg->output_type);
     gpio_set_speed(cfg->port, cfg->pin, cfg->speed);
 }
 

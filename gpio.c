@@ -48,6 +48,20 @@ void gpio_set_speed(GPIO_TypeDef *port, uint8_t pin, gpio_speed_t speed) {
     port->OSPEEDR |= ((uint32_t)speed << (pin * 2U));
 }
 
+void gpio_set_af(GPIO_TypeDef *port, uint8_t pin, uint8_t af) {
+    if (!gpio_is_valid(port, pin)) {
+        return;
+    }
+    if (pin < 8U) {
+        port->AFRL &= ~(0xFU << (pin * 4U));
+        port->AFRL |= ((uint32_t)af << (pin * 4U));
+    } else {
+        uint8_t shift = (uint8_t)(pin - 8U);
+        port->AFRH &= ~(0xFU << (shift * 4U));
+        port->AFRH |= ((uint32_t)af << (shift * 4U));
+    }
+}
+
 void gpio_init(gpio_config_t *cfg) {
     if (cfg == NULL) {
         return;
@@ -60,6 +74,9 @@ void gpio_init(gpio_config_t *cfg) {
     gpio_set_output_type(cfg->port, cfg->pin, cfg->output_type);
     gpio_set_pull(cfg->port, cfg->pin, cfg->pull);
     gpio_set_speed(cfg->port, cfg->pin, cfg->speed);
+    if (cfg->mode == GPIO_MODE_ALT) {
+        gpio_set_af(cfg->port, cfg->pin, cfg->alternate);
+    }
 }
 
 void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value) {

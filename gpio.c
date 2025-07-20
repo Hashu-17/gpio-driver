@@ -139,3 +139,16 @@ void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode) {
     };
     gpio_init(&cfg);
 }
+
+gpio_config_t gpio_pin_config_defaults(gpio_pin_t pin) {
+    gpio_config_t cfg = {
+        .port = pin.port,
+        .pin = pin.pin,
+        .mode = GPIO_MODE_INPUT,
+        .output_type = GPIO_OUTPUT_PUSHPULL,
+        .pull = GPIO_PULL_NONE,
+        .speed = GPIO_SPEED_LOW,
+        .alternate = 0U,
+    };
+    return cfg;
+}

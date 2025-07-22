@@ -49,6 +49,16 @@ typedef struct {
     uint8_t alternate;
 } gpio_config_t;
 
+typedef struct {
+    GPIO_TypeDef *port;
+    uint16_t pin_mask;
+    gpio_mode_t mode;
+    gpio_output_type_t output_type;
+    gpio_pull_t pull;
+    gpio_speed_t speed;
+    uint8_t alternate;
+} gpio_port_config_t;
+
 void gpio_port_enable(GPIO_TypeDef *port);
 void gpio_init(gpio_config_t *cfg);
 void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode);

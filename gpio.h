@@ -73,6 +73,7 @@ void gpio_toggle(GPIO_TypeDef *port, uint8_t pin);
 void gpio_pin_write(gpio_pin_t *pin, bool value);
 bool gpio_pin_read(gpio_pin_t *pin);
 void gpio_pin_toggle(gpio_pin_t *pin);
+void gpio_port_apply(const gpio_port_config_t *cfg);
 gpio_config_t gpio_pin_config_defaults(gpio_pin_t pin);
 
 #endif

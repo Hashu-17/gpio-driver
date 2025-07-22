@@ -152,3 +152,22 @@ gpio_config_t gpio_pin_config_defaults(gpio_pin_t pin) {
     };
     return cfg;
 }
+
+void gpio_port_apply(const gpio_port_config_t *cfg) {
+    if (cfg == NULL) {
+        return;
+    }
+    for (uint8_t pin = 0; pin < 16U; pin++) {
+        uint16_t mask = (uint16_t)(1U << pin);
+        if ((cfg->pin_mask & mask) == 0U) {
+            continue;
+        }
+        gpio_set_mode(cfg->port, pin, cfg->mode);
+        gpio_set_output_type(cfg->port, pin, cfg->output_type);
+        gpio_set_pull(cfg->port, pin, cfg->pull);
+        gpio_set_speed(cfg->port, pin, cfg->speed);
+        if (cfg->mode == GPIO_MODE_ALT) {
+            gpio_set_af(cfg->port, pin, cfg->alternate);
+        }
+    }
+}

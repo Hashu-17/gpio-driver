@@ -62,7 +62,7 @@ void gpio_set_af(GPIO_TypeDef *port, uint8_t pin, uint8_t af) {
     }
 }
 
-void gpio_init(gpio_config_t *cfg) {
+void gpio_init(const gpio_config_t *cfg) {
     if (cfg == NULL) {
         return;
     }
@@ -103,28 +103,28 @@ bool gpio_read(GPIO_TypeDef *port, uint8_t pin) {
     return ((port->IDR >> pin) & 0x1U) != 0U;
 }
 
-void gpio_pin_write(gpio_pin_t *pin, bool value) {
+void gpio_pin_write(const gpio_pin_t *pin, bool value) {
     if (pin == NULL) {
         return;
     }
     gpio_write(pin->port, pin->pin, value);
 }
 
-bool gpio_pin_read(gpio_pin_t *pin) {
+bool gpio_pin_read(const gpio_pin_t *pin) {
     if (pin == NULL) {
         return false;
     }
     return gpio_read(pin->port, pin->pin);
 }
 
-void gpio_pin_toggle(gpio_pin_t *pin) {
+void gpio_pin_toggle(const gpio_pin_t *pin) {
     if (pin == NULL) {
         return;
     }
     gpio_toggle(pin->port, pin->pin);
 }
 
-void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode) {
+void gpio_pin_init(const gpio_pin_t *pin, gpio_mode_t mode) {
     if (pin == NULL) {
         return;
     }

@@ -10,6 +10,12 @@
 #define GPIO_PIN_MASK(pin) (1U << (pin))
 
 typedef enum {
+    GPIO_STATUS_OK = 0,
+    GPIO_STATUS_BAD_ARG = 1,
+    GPIO_STATUS_BAD_PIN = 2
+} gpio_status_t;
+
+typedef enum {
     GPIO_MODE_INPUT = 0x00,
     GPIO_MODE_OUTPUT = 0x01,
     GPIO_MODE_ALT = 0x02,
@@ -63,8 +69,8 @@ typedef struct {
     ((reg) = ((reg) & ~(mask)) | ((value) & (mask)))
 
 void gpio_port_enable(GPIO_TypeDef *port);
-void gpio_init(const gpio_config_t *cfg);
-void gpio_pin_init(const gpio_pin_t *pin, gpio_mode_t mode);
+gpio_status_t gpio_init(const gpio_config_t *cfg);
+gpio_status_t gpio_pin_init(const gpio_pin_t *pin, gpio_mode_t mode);
 void gpio_set_mode(GPIO_TypeDef *port, uint8_t pin, gpio_mode_t mode);
 void gpio_set_output_type(GPIO_TypeDef *port, uint8_t pin, gpio_output_type_t otype);
 void gpio_set_pull(GPIO_TypeDef *port, uint8_t pin, gpio_pull_t pull);

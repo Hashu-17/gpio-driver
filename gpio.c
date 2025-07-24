@@ -153,6 +153,13 @@ gpio_config_t gpio_pin_config_defaults(gpio_pin_t pin) {
     return cfg;
 }
 
+void gpio_pin_write_mask(GPIO_TypeDef *port, uint16_t set_mask, uint16_t reset_mask) {
+    if (port == NULL) {
+        return;
+    }
+    port->BSRR = ((uint32_t)reset_mask << 16U) | set_mask;
+}
+
 void gpio_port_apply(const gpio_port_config_t *cfg) {
     if (cfg == NULL) {
         return;

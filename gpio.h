@@ -59,6 +59,9 @@ typedef struct {
     uint8_t alternate;
 } gpio_port_config_t;
 
+#define GPIO_RMW32(reg, mask, value) \
+    ((reg) = ((reg) & ~(mask)) | ((value) & (mask)))
+
 void gpio_port_enable(GPIO_TypeDef *port);
 void gpio_init(gpio_config_t *cfg);
 void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode);

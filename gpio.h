@@ -80,4 +80,9 @@ void gpio_pin_write_mask(GPIO_TypeDef *port, uint16_t set_mask, uint16_t reset_m
 void gpio_port_apply(const gpio_port_config_t *cfg);
 gpio_config_t gpio_pin_config_defaults(gpio_pin_t pin);
 
+static inline gpio_pin_t gpio_pin(GPIO_TypeDef *port, uint8_t pin) {
+    gpio_pin_t out = { port, pin };
+    return out;
+}
+
 #endif

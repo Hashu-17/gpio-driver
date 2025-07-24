@@ -62,12 +62,12 @@ void gpio_set_af(GPIO_TypeDef *port, uint8_t pin, uint8_t af) {
     }
 }
 
-void gpio_init(const gpio_config_t *cfg) {
+gpio_status_t gpio_init(const gpio_config_t *cfg) {
     if (cfg == NULL) {
-        return;
+        return GPIO_STATUS_BAD_ARG;
     }
     if (!gpio_is_valid(cfg->port, cfg->pin)) {
-        return;
+        return GPIO_STATUS_BAD_PIN;
     }
     gpio_port_enable(cfg->port);
     gpio_set_mode(cfg->port, cfg->pin, cfg->mode);
@@ -77,6 +77,7 @@ void gpio_init(const gpio_config_t *cfg) {
     if (cfg->mode == GPIO_MODE_ALT) {
         gpio_set_af(cfg->port, cfg->pin, cfg->alternate);
     }
+    return GPIO_STATUS_OK;
 }
 
 void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value) {
@@ -124,9 +125,9 @@ void gpio_pin_toggle(const gpio_pin_t *pin) {
     gpio_toggle(pin->port, pin->pin);
 }
 
-void gpio_pin_init(const gpio_pin_t *pin, gpio_mode_t mode) {
+gpio_status_t gpio_pin_init(const gpio_pin_t *pin, gpio_mode_t mode) {
     if (pin == NULL) {
-        return;
+        return GPIO_STATUS_BAD_ARG;
     }
     gpio_config_t cfg = {
         .port = pin->port,
@@ -137,7 +138,7 @@ void gpio_pin_init(const gpio_pin_t *pin, gpio_mode_t mode) {
         .speed = GPIO_SPEED_LOW,
         .alternate = 0U,
     };
-    gpio_init(&cfg);
+    return gpio_init(&cfg);
 }
 
 gpio_config_t gpio_pin_config_defaults(gpio_pin_t pin) {

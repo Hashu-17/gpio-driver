@@ -63,8 +63,8 @@ typedef struct {
     ((reg) = ((reg) & ~(mask)) | ((value) & (mask)))
 
 void gpio_port_enable(GPIO_TypeDef *port);
-void gpio_init(gpio_config_t *cfg);
-void gpio_pin_init(gpio_pin_t *pin, gpio_mode_t mode);
+void gpio_init(const gpio_config_t *cfg);
+void gpio_pin_init(const gpio_pin_t *pin, gpio_mode_t mode);
 void gpio_set_mode(GPIO_TypeDef *port, uint8_t pin, gpio_mode_t mode);
 void gpio_set_output_type(GPIO_TypeDef *port, uint8_t pin, gpio_output_type_t otype);
 void gpio_set_pull(GPIO_TypeDef *port, uint8_t pin, gpio_pull_t pull);
@@ -73,9 +73,9 @@ void gpio_set_af(GPIO_TypeDef *port, uint8_t pin, uint8_t af);
 void gpio_write(GPIO_TypeDef *port, uint8_t pin, bool value);
 bool gpio_read(GPIO_TypeDef *port, uint8_t pin);
 void gpio_toggle(GPIO_TypeDef *port, uint8_t pin);
-void gpio_pin_write(gpio_pin_t *pin, bool value);
-bool gpio_pin_read(gpio_pin_t *pin);
-void gpio_pin_toggle(gpio_pin_t *pin);
+void gpio_pin_write(const gpio_pin_t *pin, bool value);
+bool gpio_pin_read(const gpio_pin_t *pin);
+void gpio_pin_toggle(const gpio_pin_t *pin);
 void gpio_pin_write_mask(GPIO_TypeDef *port, uint16_t set_mask, uint16_t reset_mask);
 void gpio_port_apply(const gpio_port_config_t *cfg);
 gpio_config_t gpio_pin_config_defaults(gpio_pin_t pin);

@@ -161,6 +161,13 @@ void gpio_pin_write_mask(GPIO_TypeDef *port, uint16_t set_mask, uint16_t reset_m
     port->BSRR = ((uint32_t)reset_mask << 16U) | set_mask;
 }
 
+void gpio_write_port(GPIO_TypeDef *port, uint16_t value) {
+    if (port == NULL) {
+        return;
+    }
+    port->ODR = value;
+}
+
 void gpio_port_apply(const gpio_port_config_t *cfg) {
     if (cfg == NULL) {
         return;

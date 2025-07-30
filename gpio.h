@@ -83,6 +83,7 @@ void gpio_pin_write(const gpio_pin_t *pin, bool value);
 bool gpio_pin_read(const gpio_pin_t *pin);
 void gpio_pin_toggle(const gpio_pin_t *pin);
 void gpio_pin_write_mask(GPIO_TypeDef *port, uint16_t set_mask, uint16_t reset_mask);
+void gpio_write_port(GPIO_TypeDef *port, uint16_t value);
 void gpio_port_apply(const gpio_port_config_t *cfg);
 gpio_config_t gpio_pin_config_defaults(gpio_pin_t pin);
 

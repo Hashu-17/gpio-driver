@@ -168,6 +168,13 @@ void gpio_write_port(GPIO_TypeDef *port, uint16_t value) {
     port->ODR = value;
 }
 
+uint16_t gpio_read_port(GPIO_TypeDef *port) {
+    if (port == NULL) {
+        return 0U;
+    }
+    return (uint16_t)(port->IDR & 0xFFFFU);
+}
+
 void gpio_port_apply(const gpio_port_config_t *cfg) {
     if (cfg == NULL) {
         return;

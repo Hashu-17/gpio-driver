@@ -205,3 +205,15 @@ void gpio_port_set_pull(GPIO_TypeDef *port, uint16_t pin_mask, gpio_pull_t pull)
         }
     }
 }
+
+void gpio_port_set_speed(GPIO_TypeDef *port, uint16_t pin_mask, gpio_speed_t speed) {
+    if (port == NULL) {
+        return;
+    }
+    for (uint8_t pin = 0; pin < 16U; pin++) {
+        uint16_t mask = (uint16_t)(1U << pin);
+        if ((pin_mask & mask) != 0U) {
+            gpio_set_speed(port, pin, speed);
+        }
+    }
+}

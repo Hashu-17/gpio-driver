@@ -10,3 +10,9 @@ $(TARGET): $(SRC)
 
 clean:
 	rm -f $(TARGET)
+
+debug: CFLAGS += -g -O0
+debug: clean $(TARGET)
+
+release: CFLAGS += -O2
+release: clean $(TARGET)
